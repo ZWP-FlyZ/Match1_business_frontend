@@ -220,58 +220,58 @@ export default {
       /*this.$http.get("/api/getList").then(res=>{
         this.processL1 = JSON.parse(res.body.data).result.processL11;
       })*/
-      this.processL1 = [
-        {
-        "id":"1",
-        "name":"买\\卖家注册"
-      },
-      {
-        "id":"1",
-        "name":"货品发布"
-      },
-      {
-        "id":"1",
-        "name":"货品选品"
-      },
-      {
-        "id":"1",
-        "name":"商品发布"
-      },
-      {
-        "id":"1",
-        "name":"商品选品"
-      },
-      {
-        "id":"1",
-        "name":"投放"
-      },
-      {
-        "id":"1",
-        "name":"加购\\收藏"
-      },
-      {
-        "id":"1",
-        "name":"合同订立"
-      },
-      {
-        "id":"1",
-        "name":"合同履行"
-      },
-      {
-        "id":"1",
-        "name":"评价"
-      },
-      {
-        "id":"1",
-        "name":"售后"
-      }
-      ]
-    },
+    this.processL1 = [
+          {
+            "id":"1",
+            "name":"买\\卖家注册"
+          },
+          {
+            "id":"1",
+            "name":"货品发布"
+          },
+          {
+            "id":"1",
+            "name":"货品选品"
+          },
+          {
+            "id":"1",
+            "name":"商品发布"
+          },
+          {
+            "id":"1",
+            "name":"商品选品"
+          },
+          {
+            "id":"1",
+            "name":"投放"
+          },
+          {
+            "id":"1",
+            "name":"加购\\收藏"
+          },
+          {
+            "id":"1",
+            "name":"合同订立"
+          },
+          {
+            "id":"1",
+            "name":"合同履行"
+          },
+          {
+            "id":"1",
+            "name":"评价"
+          },
+          {
+            "id":"1",
+            "name":"售后"
+          }
+    ]
+  },
     getApplication:function(){
       this.hideLoading = !this.hideLoading;
       this.$http.get("/api/app/getApps").then(function(res){
         this.hideLoading = !this.hideLoading;
-        if (res.body.code == 401) {
+        if (res.body.code == "401") {
 
           this.$router.push("/login")
         }
@@ -281,10 +281,13 @@ export default {
           this.listNotEmpty = false;
         }
         else{
+
+          console.log(res);
           this.listNotEmpty = true;
           this.appList = res.body.list;
           this.appList.forEach((i,index)=>{
             if(index == 0){
+              this.$root.nowApp = i;
               this.$root.eventHub.$emit('appisEmpty',i.id);
               this.$root.eventHub.$emit('giveTabFirstApp',i.id);
             }
@@ -295,8 +298,10 @@ export default {
       })
     },
     toAppModule:function(firstapp){
+      console.log("click in app list",firstapp);
       this.APP_ID(firstapp);
       //console.log(app)
+      this.$root.nowApp = firstapp;    
       this.$root.eventHub.$emit("changeModule",firstapp);
     },
     openApp:function(){

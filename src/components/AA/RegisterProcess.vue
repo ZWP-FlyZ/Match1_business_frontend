@@ -86,6 +86,9 @@
         </div>
       </div>
 
+
+      
+
     <div class = "heads xf-heads">
         <i class="el-icon-d-arrow-left xf-edit-icon"></i> 节点前置条件
         <div class="xf-singleSelect-box">
@@ -230,7 +233,9 @@
             devauthor:'',
             devdate:'',
             application:'',//该流程所属的应用
-            processNodes:[]//流程节点，里面的信息在add tab的时候动态添加
+            processNodes:[{name:'选择类目'},{name:'是否选择模板'},
+                          {name:'搜索、获取货品模板'},{name:'填写商品信息'},
+                          {name:'审核'},{name:'机器审核'},{name:'人工审核'}]//流程节点，里面的信息在add tab的时候动态添加
           }
         }
       },
@@ -303,6 +308,8 @@
           mySelf.single.inPreselected = {"id":"1","name":"销售记录"}*/
         },
         showContent:function(i,name){
+          console.log('showContexnt',i,name);
+          this.process.processNodes[i].name = name;
           this.editableTabsValue2 = i
           this.isshowActiviti=true
           this.showwhat=i
@@ -362,7 +369,8 @@
 
         },
         openClick:function(){
-          this.$http.post("/api/app/register_process",JSON.stringify(this.process)).then(function(res){
+          console.log(this.process);
+          this.$http.post("/api/app/register_process",this.process).then(function(res){
             if(res.body.code == 200){
               this.hideTip = !this.hideTip
               this.hideMask = !this.hideMask

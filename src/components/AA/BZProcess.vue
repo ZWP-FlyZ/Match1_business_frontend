@@ -8,41 +8,42 @@
       <br />
     </div>
     <div v-else>
-    <div class = "BZProcess-total">流程定制总数：12</div>
+    <div class = "BZProcess-total">流程定制总数：{{processList.length}}</div>
     <div class="BZProcess-register" >
       <ul>
           <li class = "BZProcess-classify">业务流程</li>
           <li class = "BZProcess-create"><router-link :to="{path:'/registerProcess',query:{method:'new'}}"class = "link-btn link-btn-default">注册流程</router-link></li>
       </ul>
     </div>
-    <div class = "classfy-table" >
-      <div v-for="(item,index) in processList">
-      <div class="BZProcess-des">
-        <img src="" alt="">
-        <a href="" ><router-link to="" class = "L1-name">流程分类：{{index}}（{{item.length}}）</router-link></a>
-        <a href="" ><router-link to="/configPreCondition" class = "L1-edit">配置前置条件</router-link></a>
-        <a href="" ><router-link to="/configPreCondition" class = "L1-edit">查看前置条件</router-link></a>
-      </div> 
-      <ul class="xf-process-ul">
-      <li class="xf-process-li" v-for="i in item">
-        <img src="/static/img/tbpublish.png" alt="" ><a class="xf-el-upload-list__item-name">
-          <i class="el-icon-document"></i>
-          流程名称：{{i.name}}
-        </a>
-        <div class = "process-button">
-            <router-link :to="{path:'/registerProcess',query:{method:'edit'}}" class = "link-btn link-btn-primary" @click.native="getaProcess(i.id)">编辑</router-link>
-            <router-link :to="{path:'/registerProcess',query:{method:'look'}}" @click.native="getaProcess(i.id)" class = "link-btn link-btn-look">查看</router-link>
-            <button class = "link-btn link-btn-delete" @click="deleteDialog(item)" >删除</button>
-          </div>
-        <label class="xf-process-label" >
-          <i class="xf-el-icon-upload-success el-icon-check" style="color:#fff"></i>
-        </label>
-      </li>
-    </ul>
+    <div class="classfy-table">
+      <div >
+      <!-- <div v-for=" (item,index) in processList"> -->
+        <!-- <div class="BZProcess-des">
+          <img src="" alt="">
+          <a href="">
+            <router-link to="" class="L1-name">index:{{index}}</router-link></a>
+          <a href="">
+            <router-link to="/configPreCondition" class="L1-edit">配置前置条件</router-link></a>
+          <a href="">
+            <router-link to="/configPreCondition" class="L1-edit">查看前置条件</router-link></a>
+        </div> -->
+        <ul class="xf-process-ul">
+          <li class="xf-process-li" v-for="i in processList">
+              <img src="/static/img/tbpublish.png" alt="">
+              <a class="xf-el-upload-list__item-name">
+                <i class="el-icon-document"></i>流程名称：{{i.name}}</a>
+              <div class="process-button">
+                <router-link :to="{path:'/registerProcess',query:{method:'edit'}}" class="link-btn link-btn-primary" @click.native="getaProcess(i.id)">编辑</router-link>
+                <router-link :to="{path:'/registerProcess',query:{method:'look'}}" @click.native="getaProcess(i.id)" class="link-btn link-btn-look">查看</router-link>
+                <button class="link-btn link-btn-delete" @click="deleteDialog(item)">删除</button></div>
+              <label class="xf-process-label">
+                <i class="xf-el-icon-upload-success el-icon-check" style="color:#fff"></i>
+              </label>
+          </li>
+        </ul>
       </div>
-
     </div>
-    </div>
+  </div>
     
     <IMask :hide-mask.sync="hideMask"></IMask>
     <Delete :message="deleteContent" :hide-dialog.sync="hideDialog" :hide-mask.sync="hideMask" v-on:increment="closeDialog"></Delete>
@@ -78,10 +79,21 @@ import {mapState} from 'vuex'
         if(data == 'empty'){
           this.appisEmpty = data;
         }else{
-          this.fetchProcess(data);
+          //this.fetchProcess(data);
+          this.getPList();
         }
        })
       })
+
+      this.$root.eventHub.$on("changeModule",(data)=>{
+          console.log('changeModule',data);
+          this.getPList();
+
+      })
+
+
+
+
     },
     created(){
       
@@ -100,7 +112,7 @@ import {mapState} from 'vuex'
         console.log(typeof(data))
         this.$http.get("api/app/get_processList?id="+this.$route.query.id).then(res=>{
             this.hideLoading = !this.hideLoading;
-            if(res.body.code == 200){
+            if(res.body.code == "200"){
               if(res.body.list!=null){
                 this.processList = res.body.map;
 
@@ -139,7 +151,42 @@ import {mapState} from 'vuex'
         this.$http.get("/api/app/get_process?id="+id).then(function(res){
           sessionStorage.setItem("aProcess",JSON.stringify(res.body.list[0]));
         })
+      },
+
+      getPList(){
+        this.hideLoading = !this.hideLoading;
+        //console.log("id:"+this.$route.query.id);//1,2,3
+        this.$http.get("api/app/get_processList?id="+1).then(res=>{
+            this.hideLoading = !this.hideLoading;
+            console.log(res);
+            if(res.body.code == "200"){
+              if(res.body.list!=null){
+                var nowApp = this.$root.nowApp;
+                console.log(nowApp);
+                var nl = [];
+                res.body.list.forEach(function(element) {
+                  if(element.application.id == nowApp.id &&
+                            element.application.user.username==nowApp.user.username)
+                    nl.push(element);
+                });
+                this.processList = nl;
+                console.log("success")
+              }
+              //
+            }
+            if(res.body.code=='401'){
+                this.$router.push("/login")
+              console.log("失败")
+            }
+            if(res.body.code=='empty'){
+              console.log("是空的")//此处的空不需要做处理
+            }
+        })
       }
+
+
+
+
     }
   }
 </script>
