@@ -37,8 +37,8 @@
             hideMask:false,
             server_message:'0',
 	  		user:{
-	  			username:'',
-	  			password:''
+	  			username:'zwp0',
+	  			password:'123456'
 	  		},
             hideLoading:false
 	  	}
