@@ -102,14 +102,14 @@
         <div class="item xf-item">
 
           <div class="xf-precondition-box" v-for="i in process.processNodes[index].nodePreConditions">
-           <div class="xf-predition-label"><label>{{i.name}}</label></div>
-           <div class="xf-predition-label"><label>可配置的值：</label></div>
-           <div>
-              <MutipleSelectDelete v-bind:optionsdata="tmpSelect.nodePreSelect.multipleSelectOption" v-bind:selecteddata="tmpSelect.nodePreSelect.multipleSelected" v-on:selected="multipleCallback" ></MutipleSelectDelete>
-           </div>
-           <div class="xf-predition-delete">
-             <i class="el-icon-circle-cross xf-edit-icon" @click="deleteItem('nodeCount')"></i>
-           </div>
+                <div class="xf-predition-label"><label>{{i.name}}</label></div>
+                <div class="xf-predition-label"><label>可配置的值：</label></div>
+                <div>
+                    <MutipleSelectDelete v-bind:optionsdata="tmpSelect.nodePreSelect.multipleSelectOption" v-bind:selecteddata="tmpSelect.nodePreSelect.multipleSelected" v-on:selected="multipleCallback" ></MutipleSelectDelete>
+                </div>
+                <div class="xf-predition-delete">
+                  <i class="el-icon-circle-cross xf-edit-icon" @click="deleteNodePreItem(i.id)"></i>
+                </div>
           </div>
 
         </div>
@@ -132,7 +132,7 @@
               <MutipleSelectDelete v-bind:optionsdata="tmpSelect.pagePreSelect.multipleSelectOption" v-bind:selecteddata="tmpSelect.pagePreSelect.multipleSelected" v-on:selected="multipleCallback" ></MutipleSelectDelete>
            </div>
            <div class="xf-predition-delete">
-             <i class="el-icon-circle-cross xf-edit-icon"@click="deleteItem('pageCount')"></i>
+             <i class="el-icon-circle-cross xf-edit-icon" @click="deletePagePreItem(i)"></i>
            </div>
           </div>
         </div>
@@ -261,7 +261,12 @@
       },
       components:{MutipleSelectDelete,SingleSelect,ProcessImg,Tip,IMask,readyData},
       mounted:function(){
-        this.process.processNodes = readyData.NODE_LIST;
+        var _this = this;
+        this.process.processNodes.splice(0,7);
+        readyData.NODE_LIST.forEach(function(i){
+          _this.process.processNodes.push(i);
+        });
+        //this.process.processNodes = readyData.NODE_LIST;
         this.$nextTick(function(){
           if(this.$route.query.method=='new'){//如果是注册页面
           }else{
@@ -366,6 +371,7 @@
           this.isshowActiviti=true
           this.showwhat=i
           this.nowTable = i;
+          
           this.addTab(i,name);
           this.$nextTick(function(){
             this.queryData();
@@ -483,7 +489,38 @@
               this.pageCount--;
             }
           }
+        },
+        deleteNodePreItem(item){
+          console.log(item);
+          var thisNode = this.process.processNodes[ this.nowTable];
+          var arr = thisNode.nodePreConditions;
+          for(var ci = 0 ;ci<arr.length;ci++){
+            if(arr[ci].id == item){
+               arr.splice(ci, 1);
+               break;
+            }
+          }
+        },
+
+        deletePagePreItem(item){
+          console.log(item);
+          var thisNode = this.process.processNodes[ this.nowTable];
+          var arr = thisNode.pagePreConditions;
+          for(var ci = 0 ;ci<arr.length;ci++){
+            if(arr[ci].id == item.id){
+               arr.splice(ci, 1);
+               break;
+            }
+          }
+        },
+        test(){
+           console.log('test');
         }
+
+
+
+
+
       }
     }   
   </script>

@@ -17,7 +17,7 @@ export const NODE_LIST =
                 id:5,
                 name:'开店时间',
                 value:[]
-            },
+            }
         ],
         pagePreConditions:
         [
@@ -30,7 +30,7 @@ export const NODE_LIST =
                 id:2,
                 name:'价格库存物流',
                 value:[]
-            },
+            }
         ],
         pagemodels:[]
     },
