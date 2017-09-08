@@ -92,18 +92,20 @@
     <div class = "heads xf-heads">
         <i class="el-icon-d-arrow-left xf-edit-icon"></i> 节点前置条件
         <div class="xf-singleSelect-box">
-          <SingleSelect class="xf-single-fix" v-bind:optionsdata="single.outPreOptions" v-bind:selecteddata="single.outPreselected" v-on:selected="singleCallback">
+          <SingleSelect class="xf-single-fix" v-bind:optionsdata="tmpSelect.nodePreSelect.singleSelectOption" v-bind:selecteddata="tmpSelect.nodePreSelect.singleSelected" v-on:selected="singleNodePreCallback">
           </SingleSelect>
+          <!-- <SingleSelect class="xf-single-fix" v-bind:optionsdata="single.outPreOptions" v-bind:selecteddata="single.outPreselected" v-on:selected="singleNodePreCallback">
+          </SingleSelect> -->
         </div>
     </div>
     <div class="items xf-items-addBottom">
         <div class="item xf-item">
 
-          <div class="xf-precondition-box" v-for="i in nodeCount">
-           <div class="xf-predition-label"><label>商品类型</label></div>
+          <div class="xf-precondition-box" v-for="i in process.processNodes[index].nodePreConditions">
+           <div class="xf-predition-label"><label>{{i.name}}</label></div>
            <div class="xf-predition-label"><label>可配置的值：</label></div>
            <div>
-              <MutipleSelectDelete v-bind:optionsdata="multiple.outPreEdit" v-bind:selecteddata="multiple.outPreEditSelected" v-on:selected="multipleCallback" ></MutipleSelectDelete>
+              <MutipleSelectDelete v-bind:optionsdata="tmpSelect.nodePreSelect.multipleSelectOption" v-bind:selecteddata="tmpSelect.nodePreSelect.multipleSelected" v-on:selected="multipleCallback" ></MutipleSelectDelete>
            </div>
            <div class="xf-predition-delete">
              <i class="el-icon-circle-cross xf-edit-icon" @click="deleteItem('nodeCount')"></i>
@@ -116,18 +118,18 @@
     <div class = "heads xf-heads">
         <i class="el-icon-d-arrow-right xf-edit-icon"></i> 页面模板前置条件
         <div class="xf-singleSelect-box">
-          <SingleSelect class="xf-single-fix" v-bind:optionsdata="single.inPreOptions" v-bind:selecteddata="single.inPreSelected" v-on:selected="singleCallback">
+          <SingleSelect class="xf-single-fix" v-bind:optionsdata="tmpSelect.pagePreSelect.singleSelectOption" v-bind:selecteddata="tmpSelect.pagePreSelect.singleSelected" v-on:selected="singleCallback">
           </SingleSelect>
         </div>
     </div>
     <div class="items xf-items-addBottom">
         <div class="item xf-item">
 
-          <div class="xf-precondition-box" v-for="i in pageCount">
-           <div class="xf-predition-label"><label>ssssss</label></div>
+          <div class="xf-precondition-box" v-for="i in process.processNodes[index].pagePreConditions">
+           <div class="xf-predition-label"><label>{{i.name}}</label></div>
            <div class="xf-predition-label"><label>可配置的值：</label></div>
            <div>
-              <MutipleSelectDelete v-bind:optionsdata="multiple.inPreEdit" v-bind:selecteddata="multiple.inPreEditSelected" v-on:selected="multipleCallback" ></MutipleSelectDelete>
+              <MutipleSelectDelete v-bind:optionsdata="tmpSelect.pagePreSelect.multipleSelectOption" v-bind:selecteddata="tmpSelect.pagePreSelect.multipleSelected" v-on:selected="multipleCallback" ></MutipleSelectDelete>
            </div>
            <div class="xf-predition-delete">
              <i class="el-icon-circle-cross xf-edit-icon"@click="deleteItem('pageCount')"></i>
@@ -196,9 +198,29 @@
     import SingleSelect from '../CC/SingleSelect'
     import Tip from "../Tip"
     import IMask from '../Mask'
+    import readyData from '../../store/ProcessNodes'
     export default{
       data(){
         return {
+          tmpSelect:{
+            nodePreSelect:{
+                singleSelectOption:[],
+                singleSelected:[],
+                multipleSelectOption:[],
+                multipleSelected:[]
+            },
+            pagePreSelect:{
+                singleSelectOption:[],
+                singleSelected:[],
+                multipleSelectOption:[],
+                multipleSelected:[]
+            },
+            pageModelSelect:{
+                multipleSelectOption:[],
+                multipleSelected:[]
+            }
+          },
+          nowTable:0,
           isshowActiviti:false,
           showwhat :'5',
           multiple: {
@@ -233,14 +255,13 @@
             devauthor:'',
             devdate:'',
             application:'',//该流程所属的应用
-            processNodes:[{name:'选择类目'},{name:'是否选择模板'},
-                          {name:'搜索、获取货品模板'},{name:'填写商品信息'},
-                          {name:'审核'},{name:'机器审核'},{name:'人工审核'}]//流程节点，里面的信息在add tab的时候动态添加
+            processNodes:[]//流程节点，里面的信息在add tab的时候动态添加
           }
         }
       },
-      components:{MutipleSelectDelete,SingleSelect,ProcessImg,Tip,IMask},
+      components:{MutipleSelectDelete,SingleSelect,ProcessImg,Tip,IMask,readyData},
       mounted:function(){
+        this.process.processNodes = readyData.NODE_LIST;
         this.$nextTick(function(){
           if(this.$route.query.method=='new'){//如果是注册页面
           }else{
@@ -271,12 +292,42 @@
             mySelf.single.outPreOptions = JSON.parse(res.body.data).result.outPreCondition;
             mySelf.single.inPreOptions = JSON.parse(res.body.data).result.inPreCondition;
           })*/
+          console.log(readyData);
+
+          // this.tmpSelect.nodePreSelect.singleSelectOption = readyData.nodePerConOptionsSinle;
+          // this.tmpSelect.nodePreSelect.multipleSelectOption = readyData.nodePerConOptionsMutile;
+          // this.tmpSelect.pagePreSelect.singleSelectOption = readyData.pagePerConOptionsSinle;
+          // this.tmpSelect.pagePreSelect.multipleSelectOption = readyData.pagePerConOptionsMutile;
+
+          this.tmpSelect.nodePreSelect.singleSelectOption = [];
+           readyData.nodePerConOptionsSinle.forEach(function(i){
+              mySelf.tmpSelect.nodePreSelect.singleSelectOption.push(i);
+           });
+           this.tmpSelect.nodePreSelect.multipleSelectOption = [];
+           readyData.nodePerConOptionsMutile.forEach(function(i){
+              mySelf.tmpSelect.nodePreSelect.multipleSelectOption.push(i);
+           });
+
+           this.tmpSelect.pagePreSelect.singleSelectOption = [];
+           readyData.pagePerConOptionsSinle.forEach(function(i){
+              mySelf.tmpSelect.pagePreSelect.singleSelectOption.push(i);
+           });
+
+           this.tmpSelect.pagePreSelect.multipleSelectOption = [];
+           readyData.pagePerConOptionsMutile.forEach(function(i){
+              mySelf.tmpSelect.pagePreSelect.multipleSelectOption.push(i);
+           });
+
+
+
+          console.log( this.tmpSelect);
           mySelf.multiple.pages = [{
         "id":"10001",
         "name":"淘宝一口价商品发布页面模板",
         "imgPath":"static/img/page1.png"
       }]
-          mySelf.single.outPreOptions = [{"id":"1","name":"商品类型"},
+      //mySelf.single.outPreOptions = readyData.nodePerConOptionsSinle;
+           mySelf.single.outPreOptions = [{"id":"1","name":"商品类型"},
       {"id":"2","name":"目标节点时限"},
       {"id":"3","name":"是否首次进入该节点"},
       {"id":"4","name":"商家信用等级"},
@@ -309,10 +360,12 @@
         },
         showContent:function(i,name){
           console.log('showContexnt',i,name);
+          console.log('showContexnt_nodes',readyData);
           this.process.processNodes[i].name = name;
           this.editableTabsValue2 = i
           this.isshowActiviti=true
           this.showwhat=i
+          this.nowTable = i;
           this.addTab(i,name);
           this.$nextTick(function(){
             this.queryData();
@@ -331,7 +384,7 @@
               }
             });
           }
-          this.process.processNodes.pop()//删除item
+          //this.process.processNodes.pop()//删除item
           this.editableTabsValue2 = activeName;
           this.editableTabs2 = tabs.filter(tab => tab.name !== targetName);
         },
@@ -365,28 +418,53 @@
         multipleCallback: function(data){
           this.multiple.selectedList = data;
         },
-        singleCallback:function(data){
+        singleCallback(){
 
         },
+
+
+        singleNodePreCallback:function(data){
+          var flag = true;
+          var thisNode = this.process.processNodes[ this.nowTable];
+          console.log(thisNode);
+          if(thisNode){
+            thisNode.nodePreConditions.forEach((i)=>{
+              console.log(i);
+              if(i.id==data.id){
+                flag = false;
+              }
+
+            })
+           }
+           if(flag == true){
+              thisNode.nodePreConditions.push({
+                id:data.id,//前置条件id
+                name:data.name,//前置条件key
+                //还有一个value在submit的时候处理，真是难
+                value:[]
+              })
+           }
+        },
         openClick:function(){
+          this.process.application = this.$root.nowApp;
           console.log(this.process);
-          this.$http.post("/api/app/register_process",this.process).then(function(res){
-            if(res.body.code == 200){
-              this.hideTip = !this.hideTip
-              this.hideMask = !this.hideMask
-              this.tipText = "保存成功！"
-              //
-            }
-            if(res.body.code=='error'){
-              this.hideTip = !this.hideTip
-              this.hideMask = !this.hideMask
-              this.tipText = "保存失败！"
-              console.log("保存失败")
-            }
-            if(res.body.code == 401){
-              this.$router.push("/login")
-            }
-          })
+          // this.$http.post("/api/app/register_process",this.process).then(function(res){
+          //   if(res.body.code == 200){
+          //     this.hideTip = !this.hideTip
+          //     this.hideMask = !this.hideMask
+          //     this.tipText = "保存成功！"
+          //     //
+          //   }
+          //   if(res.body.code=='error'){
+          //     this.hideTip = !this.hideTip
+          //     this.hideMask = !this.hideMask
+          //     this.tipText = "保存失败！"
+          //     console.log("保存失败")
+          //   }
+          //   if(res.body.code == 401){
+          //     this.$router.push("/login")
+          //   }
+          // })
         },
         closeTip:function(data){
           this.hideTip = data
