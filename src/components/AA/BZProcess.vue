@@ -16,9 +16,9 @@
       </ul>
     </div>
     <div class="classfy-table">
-      <div >
+      <div v-for=" (item,index) in processList">
       <!-- <div v-for=" (item,index) in processList"> -->
-        <!-- <div class="BZProcess-des">
+        <div class="BZProcess-des">
           <img src="" alt="">
           <a href="">
             <router-link to="" class="L1-name">index:{{index}}</router-link></a>
@@ -26,7 +26,8 @@
             <router-link to="/configPreCondition" class="L1-edit">配置前置条件</router-link></a>
           <a href="">
             <router-link to="/configPreCondition" class="L1-edit">查看前置条件</router-link></a>
-        </div> -->
+        </div>
+
         <ul class="xf-process-ul">
           <li class="xf-process-li" v-for="i in processList">
               <img src="/static/img/tbpublish.png" alt="">
@@ -154,22 +155,18 @@ import {mapState} from 'vuex'
       },
 
       getPList(){
+         var nowApp = this.$root.nowApp;
         this.hideLoading = !this.hideLoading;
         //console.log("id:"+this.$route.query.id);//1,2,3
-        this.$http.get("api/app/get_processList?id="+1).then(res=>{
+        this.$http.get("api/app/get_processList?id="+nowApp.id).then(res=>{
             this.hideLoading = !this.hideLoading;
             console.log(res);
             if(res.body.code == "200"){
-              if(res.body.list!=null){
-                var nowApp = this.$root.nowApp;
+              if(res.body.map!=null){
+               
                 console.log(nowApp);
-                var nl = [];
-                res.body.list.forEach(function(element) {
-                  if(element.application.id == nowApp.id &&
-                            element.application.user.username==nowApp.user.username)
-                    nl.push(element);
-                });
-                this.processList = nl;
+                
+                this.processList = res.body.map;
                 console.log("success")
               }
               //
