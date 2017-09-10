@@ -26,7 +26,7 @@
 
 <script>
     export default{
-      props: ['optionsdata','selecteddata','preview'],
+      props: ['optionsdata','selecteddata','preview','mid'],
       data: function() {
         var data = {
             originOptions: [],
@@ -34,7 +34,8 @@
             show: false,
             search: '',
             selectedList: [],
-            selectedIdList: []
+            selectedIdList: [],
+            midV:{id:0,name:''}
         }
         return data
     },
@@ -58,6 +59,11 @@
                 var item = this.selectedList[i];
                 this.selectedIdList.push(item.id); 
             }
+        },
+        mid:function(val,oldv){
+            //console.log(val,this.midV)
+            this.midV.id = val.id;
+            this.midV.name = val.name;
         }
 
     },
@@ -112,7 +118,7 @@
         },
         dispatchData: function(){
             // console.log('派发！！');
-            this.$emit('selected', this.selectedList);
+            this.$emit('selected', this.selectedList,this.midV);
         },
         multipleRemove: function(id){
             //console.log('删除！' + id)

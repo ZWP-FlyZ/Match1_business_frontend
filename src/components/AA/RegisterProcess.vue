@@ -75,13 +75,13 @@
       <div class="items">
         <div  class="xf-yellow">
           <div class="item xf-item-fix-margin">
-          <label class="nameid">节点名称：</label><input type="text" class="xf-input" v-model="process.processNodes[index].name" placeholder="输入节点名称"  autocomplete="on" v-bind:readOnly="$route.query.method =='look'" v-bind:class="{'xf-noborder':$route.query.method =='look'}" autofocus="autofocus">
+          <label class="nameid">节点名称：</label><input type="text" class="xf-input" v-model="process.processNodes[item.id].name" placeholder="输入节点名称"  autocomplete="on" v-bind:readOnly="$route.query.method =='look'" v-bind:class="{'xf-noborder':$route.query.method =='look'}" autofocus="autofocus">
         </div>
         <div class="item xf-item-fix-margin">
-          <label class="nameid">节点类型：</label><input type="text" class="xf-input" v-model="process.processNodes[index].type" placeholder="输入节点类型"  autocomplete="on" v-bind:readOnly="$route.query.method =='look'" v-bind:class="{'xf-noborder':$route.query.method =='look'}" autofocus="autofocus">
+          <label class="nameid">节点类型：</label><input type="text" class="xf-input" v-model="process.processNodes[item.id].type" placeholder="输入节点类型"  autocomplete="on" v-bind:readOnly="$route.query.method =='look'" v-bind:class="{'xf-noborder':$route.query.method =='look'}" autofocus="autofocus">
         </div>
         <div class="item xf-item-fix-margin">
-          <label class="nameid">节点描述：</label><input type="text" class="xf-input" v-model="process.processNodes[index].description" placeholder="输入节点描述"  autocomplete="on" v-bind:readOnly="$route.query.method =='look'" v-bind:class="{'xf-noborder':$route.query.method =='look'}" autofocus="autofocus">
+          <label class="nameid">节点描述：</label><input type="text" class="xf-input" v-model="process.processNodes[item.id].description" placeholder="输入节点描述"  autocomplete="on" v-bind:readOnly="$route.query.method =='look'" v-bind:class="{'xf-noborder':$route.query.method =='look'}" autofocus="autofocus">
         </div>
         </div>
       </div>
@@ -92,7 +92,7 @@
     <div class = "heads xf-heads">
         <i class="el-icon-d-arrow-left xf-edit-icon"></i> 节点前置条件
         <div class="xf-singleSelect-box">
-          <SingleSelect class="xf-single-fix" v-bind:optionsdata="tmpSelect.nodePreSelect.singleSelectOption" v-bind:selecteddata="tmpSelect.nodePreSelect.singleSelected" v-on:selected="singleNodePreCallback">
+          <SingleSelect class="xf-single-fix"  v-bind:optionsdata="tmpSelect.nodePreSelect.singleSelectOption" v-bind:selecteddata="tmpSelect.nodePreSelect.singleSelected" v-on:selected="singleNodePreCallback">
           </SingleSelect>
           <!-- <SingleSelect class="xf-single-fix" v-bind:optionsdata="single.outPreOptions" v-bind:selecteddata="single.outPreselected" v-on:selected="singleNodePreCallback">
           </SingleSelect> -->
@@ -101,11 +101,11 @@
     <div class="items xf-items-addBottom">
         <div class="item xf-item">
 
-          <div class="xf-precondition-box" v-for="i in process.processNodes[index].nodePreConditions">
+          <div class="xf-precondition-box" v-for="i in process.processNodes[item.id].nodePreConditions">
                 <div class="xf-predition-label"><label>{{i.name}}</label></div>
                 <div class="xf-predition-label"><label>可配置的值：</label></div>
                 <div>
-                    <MutipleSelectDelete v-bind:optionsdata="tmpSelect.nodePreSelect.multipleSelectOption" v-bind:selecteddata="tmpSelect.nodePreSelect.multipleSelected" v-on:selected="multipleCallback" ></MutipleSelectDelete>
+                    <MutipleSelectDelete v-bind:mid="{id:i.id,name:i.name}" v-bind:optionsdata="tmpSelect.nodePreSelect.multipleSelectOption" v-bind:selecteddata="tmpSelect.nodePreSelect.multipleSelected" v-on:selected="multipleNodePreCallback"></MutipleSelectDelete>
                 </div>
                 <div class="xf-predition-delete">
                   <i class="el-icon-circle-cross xf-edit-icon" @click="deleteNodePreItem(i.id)"></i>
@@ -118,18 +118,18 @@
     <div class = "heads xf-heads">
         <i class="el-icon-d-arrow-right xf-edit-icon"></i> 页面模板前置条件
         <div class="xf-singleSelect-box">
-          <SingleSelect class="xf-single-fix" v-bind:optionsdata="tmpSelect.pagePreSelect.singleSelectOption" v-bind:selecteddata="tmpSelect.pagePreSelect.singleSelected" v-on:selected="singleCallback">
+          <SingleSelect class="xf-single-fix" v-bind:optionsdata="tmpSelect.pagePreSelect.singleSelectOption" v-bind:selecteddata="tmpSelect.pagePreSelect.singleSelected" v-on:selected="singlePagePreCallback">
           </SingleSelect>
         </div>
     </div>
     <div class="items xf-items-addBottom">
         <div class="item xf-item">
 
-          <div class="xf-precondition-box" v-for="i in process.processNodes[index].pagePreConditions">
+          <div class="xf-precondition-box" v-for="i in process.processNodes[item.id].pagePreConditions">
            <div class="xf-predition-label"><label>{{i.name}}</label></div>
            <div class="xf-predition-label"><label>可配置的值：</label></div>
            <div>
-              <MutipleSelectDelete v-bind:optionsdata="tmpSelect.pagePreSelect.multipleSelectOption" v-bind:selecteddata="tmpSelect.pagePreSelect.multipleSelected" v-on:selected="multipleCallback" ></MutipleSelectDelete>
+              <MutipleSelectDelete v-bind:mid="{id:i.id,name:i.name}" v-bind:optionsdata="tmpSelect.pagePreSelect.multipleSelectOption" v-bind:selecteddata="tmpSelect.pagePreSelect.multipleSelected" v-on:selected="multiplePagePreCallback" ></MutipleSelectDelete>
            </div>
            <div class="xf-predition-delete">
              <i class="el-icon-circle-cross xf-edit-icon" @click="deletePagePreItem(i)"></i>
@@ -155,7 +155,7 @@
            </div>
            <div class="xf-predition-label"><label>关联的页面模板：</label></div>
            <div>
-              <MutipleSelectDelete v-bind:optionsdata="multiple.pages" v-bind:selecteddata="multiple.pageSelected" v-on:selected="multipleCallback" ></MutipleSelectDelete>
+              <MutipleSelectDelete v-bind:optionsdata="tmpSelect.pageModelSelect.multipleSelectOption" v-bind:selecteddata="tmpSelect.pageModelSelect.multipleSelectOption.multipleSelected" v-on:selected="multiplePageModelCallback" ></MutipleSelectDelete>
            </div>
           </div>
         </div>
@@ -248,11 +248,11 @@
           nodeCount:2,
           pageCount:2,
           process:{
-            name:'',
-            nodeNum:'',
-            pdesc:'',
+            name:'process1',
+            nodeNum:'7',
+            pdesc:'这是描述',
             type:'',
-            devauthor:'',
+            devauthor:'zwp',
             devdate:'',
             application:'',//该流程所属的应用
             processNodes:[]//流程节点，里面的信息在add tab的时候动态添加
@@ -266,6 +266,7 @@
         readyData.NODE_LIST.forEach(function(i){
           _this.process.processNodes.push(i);
         });
+
         //this.process.processNodes = readyData.NODE_LIST;
         this.$nextTick(function(){
           if(this.$route.query.method=='new'){//如果是注册页面
@@ -303,8 +304,8 @@
           // this.tmpSelect.nodePreSelect.multipleSelectOption = readyData.nodePerConOptionsMutile;
           // this.tmpSelect.pagePreSelect.singleSelectOption = readyData.pagePerConOptionsSinle;
           // this.tmpSelect.pagePreSelect.multipleSelectOption = readyData.pagePerConOptionsMutile;
-
-          this.tmpSelect.nodePreSelect.singleSelectOption = [];
+          var mySelf = this;
+            this.tmpSelect.nodePreSelect.singleSelectOption = [];
            readyData.nodePerConOptionsSinle.forEach(function(i){
               mySelf.tmpSelect.nodePreSelect.singleSelectOption.push(i);
            });
@@ -322,6 +323,13 @@
            readyData.pagePerConOptionsMutile.forEach(function(i){
               mySelf.tmpSelect.pagePreSelect.multipleSelectOption.push(i);
            });
+
+            this.tmpSelect.pageModelSelect.multipleSelectOption = [];
+            readyData.pageModels.forEach(function(i){
+              mySelf.tmpSelect.pageModelSelect.multipleSelectOption.push(i);
+           });
+
+
 
 
 
@@ -366,7 +374,7 @@
         showContent:function(i,name){
           console.log('showContexnt',i,name);
           console.log('showContexnt_nodes',readyData);
-          this.process.processNodes[i].name = name;
+          //this.process.processNodes[i].name = name;
           this.editableTabsValue2 = i
           this.isshowActiviti=true
           this.showwhat=i
@@ -376,6 +384,7 @@
           this.$nextTick(function(){
             this.queryData();
           })
+
         },
         removeTab:function(targetName) {
           let tabs = this.editableTabs2;
@@ -386,6 +395,7 @@
                 let nextTab = tabs[index + 1] || tabs[index - 1];
                   if (nextTab) {
                     activeName = nextTab.name;
+                    this.nowTable=nextTab.id;
                   }
               }
             });
@@ -394,6 +404,7 @@
           this.editableTabsValue2 = activeName;
           this.editableTabs2 = tabs.filter(tab => tab.name !== targetName);
         },
+
         addTab:function(targetName,name) {
           let newTabName = ++this.tabIndex + '';
           let tabs = this.editableTabs2;
@@ -415,11 +426,11 @@
                id: targetName,
                title: name,
                name: name,
-               content: 'New'
+               //content: 'New'
             });
             this.editableTabsValue2 = name;          
           }
-          console.log(this.editableTabs2)
+          console.log('node tabs ',this.editableTabs2)
         },
         multipleCallback: function(data){
           this.multiple.selectedList = data;
@@ -451,26 +462,106 @@
               })
            }
         },
+
+        multipleNodePreCallback(data,item){
+          console.log('multipNodePre',data,item);
+          var flag = true;
+          var thisNode = this.process.processNodes[ this.nowTable];
+          if(thisNode){
+            thisNode.nodePreConditions.forEach((i)=>{
+              if(i.id==item.id){
+                i.value.splice(0,i.value.length);
+                data.forEach(function(el){
+                  i.value.push(el);
+                });
+                
+              }
+            })
+           }
+
+        },
+
+      singlePagePreCallback:function(data){
+          var flag = true;
+          var thisNode = this.process.processNodes[ this.nowTable];
+          console.log(thisNode);
+          if(thisNode){
+            thisNode.pagePreConditions.forEach((i)=>{
+              console.log(i);
+              if(i.id==data.id){
+                flag = false;
+              }
+
+            })
+           }
+           if(flag == true){
+              thisNode.pagePreConditions.push({
+                id:data.id,//前置条件id
+                name:data.name,//前置条件key
+                //还有一个value在submit的时候处理，真是难
+                value:[]
+              })
+           }
+        },
+
+        multiplePagePreCallback(data,item){
+          console.log('multipNodePre',data,item);
+          var flag = true;
+          var thisNode = this.process.processNodes[ this.nowTable];
+          if(thisNode){
+            thisNode.pagePreConditions.forEach((i)=>{
+              if(i.id==item.id){
+                i.value.splice(0,i.value.length);
+                data.forEach(function(el){
+                  i.value.push(el);
+                });
+                
+              }
+            })
+           }
+
+        },
+
+        multiplePageModelCallback(data,item){
+          console.log('multipNodePre',data,item);
+          var flag = true;
+          var thisNode = this.process.processNodes[ this.nowTable];
+          if(thisNode){
+            thisNode.pagemodels.splice(0,thisNode.pagemodels.length);
+            data.forEach(function(el){
+              thisNode.pagemodels.push(el);
+            });            
+
+           }
+        },
+
+
+
+
+
+
         openClick:function(){
           this.process.application = this.$root.nowApp;
-          console.log(this.process);
-          // this.$http.post("/api/app/register_process",this.process).then(function(res){
-          //   if(res.body.code == 200){
-          //     this.hideTip = !this.hideTip
-          //     this.hideMask = !this.hideMask
-          //     this.tipText = "保存成功！"
-          //     //
-          //   }
-          //   if(res.body.code=='error'){
-          //     this.hideTip = !this.hideTip
-          //     this.hideMask = !this.hideMask
-          //     this.tipText = "保存失败！"
-          //     console.log("保存失败")
-          //   }
-          //   if(res.body.code == 401){
-          //     this.$router.push("/login")
-          //   }
-          // })
+          console.log(JSON.stringify(this.process));
+          console.log(this.tmpSelect);
+          var tm = JSON.stringify(this.process);
+          this.$http.post("/api/app/register_process",this.process).then(function(res){
+            if(res.body.code == 200){
+              this.hideTip = !this.hideTip
+              this.hideMask = !this.hideMask
+              this.tipText = "保存成功！"
+              //
+            }
+            if(res.body.code=='error'){
+              this.hideTip = !this.hideTip
+              this.hideMask = !this.hideMask
+              this.tipText = "保存失败！"
+              console.log("保存失败")
+            }
+            if(res.body.code == 401){
+              this.$router.push("/login")
+            }
+          })
         },
         closeTip:function(data){
           this.hideTip = data

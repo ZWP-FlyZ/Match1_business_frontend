@@ -21,7 +21,7 @@
         <div class="BZProcess-des">
           <img src="" alt="">
           <a href="">
-            <router-link to="" class="L1-name">index:{{index}}</router-link></a>
+            <router-link to="" class="L1-name">流程类型:{{index}}</router-link></a>
           <a href="">
             <router-link to="/configPreCondition" class="L1-edit">配置前置条件</router-link></a>
           <a href="">
@@ -29,7 +29,7 @@
         </div>
 
         <ul class="xf-process-ul">
-          <li class="xf-process-li" v-for="i in processList">
+          <li class="xf-process-li" v-for="i in item">
               <img src="/static/img/tbpublish.png" alt="">
               <a class="xf-el-upload-list__item-name">
                 <i class="el-icon-document"></i>流程名称：{{i.name}}</a>
@@ -164,9 +164,10 @@ import {mapState} from 'vuex'
             if(res.body.code == "200"){
               if(res.body.map!=null){
                
-                console.log(nowApp);
+                
                 
                 this.processList = res.body.map;
+                console.log('processList',this.processList);
                 console.log("success")
               }
               //

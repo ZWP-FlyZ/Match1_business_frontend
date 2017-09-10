@@ -135,12 +135,33 @@ export const pagePerConOptionsMutile =
 ];
 
 
+export const pageModels=
+[
+    {
+    "id":11,
+    "name":"页面模板1",
+    "imgPath":"static/img/page1.png"
+    },
+    {
+        "id":12,
+        "name":"页面模板2",
+        "imgPath":"static/img/page2.png"
+    },
+    {
+        "id":13,
+        "name":"页面模板3",
+        "imgPath":"static/img/page3.png"
+    },
+];
+
+
 
 export default{
     NODE_LIST,
     nodePerConOptionsSinle,
     nodePerConOptionsMutile,
     pagePerConOptionsSinle,
-    pagePerConOptionsMutile
+    pagePerConOptionsMutile,
+    pageModels
 }
 
