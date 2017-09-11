@@ -13,7 +13,7 @@ import './assets/css/index.css'
 import './assets/css/login.css'
 import * as Constant from './constant.js'
 
-Vue.prototype.Constant = Constant
+Vue.prototype.Constant = Constant;
 Vue.use(VueResource)
 Vue.use(vuex)
 Vue.use(ElementUI)

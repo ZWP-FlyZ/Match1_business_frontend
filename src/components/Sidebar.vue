@@ -182,10 +182,12 @@ export default {
   props:['message'],
   components:{IMask,RegisterApplication,Loading},
   mounted:function(){
+    this.getApplication();
       this.$nextTick(function(){
         if(this.message == 1){
-        this.getApplication();
+       
       }
+       this.getApplication();
       this.getChoosedList();
       this.getProcessL1();
       //右边触发了左边，打开注册应用页面
@@ -268,9 +270,12 @@ export default {
     ]
   },
     getApplication:function(){
-      this.hideLoading = !this.hideLoading;
-      this.$http.get("/api/app/getApps").then(function(res){
-        this.hideLoading = !this.hideLoading;
+      //this.Constant.ajaxBaseUrl
+      console.log("in application");
+      this.hideLoading = true;
+      this.$http.get(this.Constant.ajaxBaseUrl+"/app/getApps").then(function(res){
+        console.log(res)
+        this.hideLoading = false;
         if (res.body.code == "401") {
 
           this.$router.push("/login")

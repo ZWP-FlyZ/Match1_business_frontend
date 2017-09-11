@@ -545,7 +545,7 @@
           console.log(JSON.stringify(this.process));
           console.log(this.tmpSelect);
           var tm = JSON.stringify(this.process);
-          this.$http.post("/api/app/register_process",this.process).then(function(res){
+          this.$http.post(this.Constant.ajaxBaseUrl+"/app/register_process",this.process).then(function(res){
             if(res.body.code == 200){
               this.hideTip = !this.hideTip
               this.hideMask = !this.hideMask
