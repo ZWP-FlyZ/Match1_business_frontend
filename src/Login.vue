@@ -50,12 +50,14 @@
             if(!this.user.username || !this.user.password) return
             this.USER_SIGNIN(this.user)
             this.hideLoading = true
+            //this.Constant.ajaxBaseUrl
             this.$http.post("/api/login",JSON.stringify(this.user)).then(function(res){
+                console.log(res);
                 this.hideLoading = false
                 if(res.body.code ==404){
                     this.server_message = "检查用户名密码是否正确";
                 }
-                if(res.body.code ==2001){
+                if(res.body.code =="2001"){
                     this.server_message = "欢迎，应用方";
                     this.$router.push("/aaindex")
                 }

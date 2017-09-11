@@ -733,7 +733,7 @@
   .items,.grey-option,.yellow{text-align: left;width:94%;}
   .xf-multiple-fix-width{width:30% !important;}
   .twocolor{left:0px;}
-  .xf-heads .xf-singleSelect-box{position: relative;top: -36px;left: 20%;}
+  .xf-heads .xf-singleSelect-box{position: relative;top: -36px;left: 20%;height:20px}
   .xf-precondition-box {display:flex;justify-content:flex-start;align-items:flex-start;border:1px solid #f0f0f0;padding-left:2%;text-align: left;height:50px;padding-top:7px;margin-bottom:10px;}
   .xf-precondition-box div{margin-right:3%;}
   .xf-precondition-box .xf-predition-label{margin-top:5px;width:15%;}

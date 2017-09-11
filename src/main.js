@@ -11,6 +11,9 @@ import Login from './Login'
 //import 'bootstrap/dist/css/bootstrap.css'
 import './assets/css/index.css'
 import './assets/css/login.css'
+import * as Constant from './constant.js'
+
+Vue.prototype.Constant = Constant
 Vue.use(VueResource)
 Vue.use(vuex)
 Vue.use(ElementUI)
