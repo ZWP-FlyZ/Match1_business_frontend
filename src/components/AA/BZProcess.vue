@@ -149,9 +149,10 @@ import {mapState} from 'vuex'
       },
       //查看时或者编辑时调用的方法
       getaProcess:function(id){
-        this.$http.get("/api/app/get_process?id="+id).then(function(res){
-          sessionStorage.setItem("aProcess",JSON.stringify(res.body.list[0]));
-        })
+        // this.$http.get("/api/app/get_process?id="+id).then(function(res){
+        //   sessionStorage.setItem("aProcess",JSON.stringify(res.body.list[0]));
+        // })
+        
       },
 
       getPList(){
