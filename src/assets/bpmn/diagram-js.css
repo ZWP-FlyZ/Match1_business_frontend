@@ -308,11 +308,11 @@ svg.new-parent {
 }
 
 .djs-palette .entry:hover {
-  color: rgb(255, 116, 0);
+  color: #20a0ff;
 }
 
 .highlighted-entry {
-  color: rgb(255, 116, 0) !important;
+  color: #20a0ff !important;
 }
 
 .djs-palette:not(.open) {
@@ -408,7 +408,7 @@ svg.new-parent {
 
 .djs-popup .entry.active {
   color: rgb(255, 116, 0);
-  border: solid 1px rgb(255, 116, 0);
+  border: solid 1px #20a0ff;
   border-radius: 3px;
   background-color: #F6F6F6;
 }
