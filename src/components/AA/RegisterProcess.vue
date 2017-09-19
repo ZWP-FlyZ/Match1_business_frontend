@@ -1,7 +1,8 @@
 
 <style>
   @import "../../assets/css/edit.scss";
-
+  @import "../../assets/bpmn/diagram-js.css";
+  @import "../../assets/bpmn/bpmn-embedded.css";
 </style>
 <template>
   <div class=" regisiterpage">
@@ -49,7 +50,10 @@
     <div class="heads xf-heads">
       <i class="el-icon-picture xf-edit-icon"></i> 流程图形化表达{{editableTabs2.length}}
     </div>
-    <div class="items">
+    <div id="canvas" @click='handlerClick'></div>
+    <button id="save-button" class="btn btn-primary">生成XML</button>
+
+    <!-- <div class="items">
       <div class="yellow-block xf-node-style" >
         <ul class="xf-node-ul">
           <li v-for="(item,index) in nodeList">
@@ -62,11 +66,11 @@
           </li>
         </ul>
       </div>
-    </div>
+    </div> -->
     <div class="items">
       <div class=" xf-process-style" >
-        <ProcessImg class="xf-process-img" v-on:show="showContent"></ProcessImg>
-         <el-tabs v-model="editableTabsValue2" type="card" closable @tab-remove="removeTab">
+<!--         <ProcessImg class="xf-process-img" v-on:show="showContent"></ProcessImg>
+ -->         <el-tabs v-model="editableTabsValue2" type="card" closable @tab-remove="removeTab">
          <el-tab-pane class="xf-content-height" v-for="(item, index) in editableTabs2" :key="item.name" :label="item.title" :name="item.name" >
     <div >
       <div class="heads xf-heads">
@@ -193,6 +197,8 @@
     import SingleSelect from '../CC/SingleSelect'
     import Tip from "../Tip"
     import IMask from '../Mask'
+    import BpmnViewer from 'bpmn-js'
+    import BpmnModeler from 'bpmn-moddle'
     export default{
       data(){
         return {
@@ -236,7 +242,10 @@
       },
       components:{MutipleSelectDelete,SingleSelect,ProcessImg,Tip,IMask},
       mounted:function(){
+
         this.$nextTick(function(){
+          require('../../assets/bpmn/bpmn-modeler.js')
+          require( '../../assets/bpmn/modeler.js')
           if(this.$route.query.method=='new'){//如果是注册页面
           }else{
             this.process = JSON.parse(sessionStorage.getItem("aProcess"))
@@ -245,8 +254,9 @@
         })
       },
       created:function(){
+        //document.getElementById("canvas").addEventListener("click",this.handlerClick,false)
         //生成对象属性
-        for(let i=0;i<this.process.nodeNum;i++){
+        for(let i=0;i<5;i++){
           var item = {
             name:'',
             type:'',
@@ -254,10 +264,35 @@
             nodePreConditions:[],
             pagePreConditions:[],
             pagemodels:[]
-          }
+          };
+          this.process.processNodes.push(item);
         }
-      },      
+      },    
       methods:{
+        handlerClick:function(e){
+          var elementid,elementname;
+          console.log(e.target)
+          if(e.target.getAttribute("width") > '700'){
+            return false;
+          }
+          if(e.target.parentNode!==undefined){
+              elementid = e.target.parentNode.getAttribute("data-element-id");
+          }
+          if(e.target.previousSibling!==undefined){
+            if(e.target.previousSibling.childNodes[1]!==undefined){
+              if(e.target.previousSibling.childNodes[1].childNodes[0]!==undefined){
+                if(e.target.previousSibling.childNodes[1].childNodes[0].innerHTML!==undefined&&e.target.previousSibling.childNodes[1].childNodes[0].innerHTML!==""){
+                  elementname = e.target.previousSibling.childNodes[1].childNodes[0].innerHTML;
+                }else{
+                  elementname = elementid;
+                }
+              }else{
+                elementname = elementid;
+              }
+            }
+          }
+          this.showContent(elementid,elementname);
+        },
         queryData:function(){
           var mySelf = this
           /*this.$http.get("/api/getList").then(res=>{
@@ -303,6 +338,7 @@
           mySelf.single.inPreselected = {"id":"1","name":"销售记录"}*/
         },
         showContent:function(i,name){
+          console.log(i,name)
           this.editableTabsValue2 = i
           this.isshowActiviti=true
           this.showwhat=i
@@ -341,19 +377,15 @@
              }
            })
           }          
-          if(isAdd){            
-            console.log("0")
-            //console.log(this.editableTabs2)
-            console.log("2")
-            this.editableTabs2.push({
+          if(isAdd){ 
+               this.editableTabs2.push({
                id: targetName,
                title: name,
-               name: name,
+               name: name || "new tab",
                content: 'New'
             });
-            this.editableTabsValue2 = name;          
+            this.editableTabsValue2 = name; 
           }
-          console.log(this.editableTabs2)
         },
         multipleCallback: function(data){
           this.multiple.selectedList = data;
@@ -402,6 +434,18 @@
     }   
   </script>
 <style scoped>
+    #canvas {
+      height: 450px;
+      padding: 0;
+      position:relative;
+      margin-top:20px;
+    }
+
+    #save-button {
+      position: absolute;
+      top: 72%;
+      right: 80px;
+    }
   .xf-node-style{text-align:center;}
   .xf-node-ul li {
   float:left;
