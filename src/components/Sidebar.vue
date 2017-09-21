@@ -102,7 +102,7 @@
 
     <div id="application" v-if="message==5">
       <div class="application-heading">
-        <span>可用业务能力</span>
+        <span>可用业务服务</span>
       </div>
       <div class="application-list">
         <el-collapse v-model="activeNames">

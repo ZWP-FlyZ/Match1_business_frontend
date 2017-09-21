@@ -28,7 +28,7 @@
     </div>
     <div class="heads xf-heads">
       <i class="el-icon-menu xf-edit-icon"></i> 
-      关联业务能力
+      关联业务服务
     </div>
     <div class="items xf-items-addBottom">
       <div class="item xf-item">

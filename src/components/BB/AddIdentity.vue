@@ -4,7 +4,7 @@
 	        <div class="delete-modal-content">
 			<div class="delete-modal-body">
 				<div class = "delete-modal-delete-confirm">
-					<span class="icon-delete"></span>新建业务身份
+					<span class="icon-delete"></span>新建业务标
 				</div>
 				<div class = "delete-modal-delete-content">
 					<label>名称：</label>

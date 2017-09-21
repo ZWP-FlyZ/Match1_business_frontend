@@ -1,5 +1,5 @@
 <template>
-	<!-- <div>为页面模板配置业务能力yy版本</div> -->
+	<!-- <div>为页面模板配置业务服务yy版本</div> -->
 	<div>
 	   <HistoryPath :historyPathTitle="historyPathTitle"></HistoryPath>
 		<div class="CCEditPageTemplate-CCLeft">
@@ -255,13 +255,13 @@
 				</div>
 				<div class = "template-confirm">
 					<router-link to="/cCEditProcessFchoosed"  class="link-btn link-btn-blue">保存</router-link>
-					<label @click="showRight(110)"><router-link to=""  class="link-btn link-btn-primary" style="margin-left:10px;">查看所有业务能力</router-link></label>
+					<label @click="showRight(110)"><router-link to=""  class="link-btn link-btn-primary" style="margin-left:10px;">查看所有业务服务</router-link></label>
 				</div>
 				<!-- <div class="BZProcess-table" style="border:0;">
 		          <div class="BZ-edit">
 		            <router-link to="/cCEditprocess"  class="link-btn link-btn-blue">上一步</router-link>
 		            <router-link to="/cCEditprocess"  class="link-btn link-btn-blue">下一步</router-link>
-		            <label @click="showRight(110)"><router-link to=""  class="link-btn link-btn-primary" style="margin-left:10px;">查看所有业务能力</router-link></label>
+		            <label @click="showRight(110)"><router-link to=""  class="link-btn link-btn-primary" style="margin-left:10px;">查看所有业务服务</router-link></label>
 		          </div>
 		        </div> -->
 		    <IMask :hide-mask.sync="hideMask"></IMask>
@@ -335,7 +335,7 @@
 			</div>
 			<!-- UI结束 -->
 			<div class="ccright-config">
-				<!-- 业务能力-描述宝贝类型 -->
+				<!-- 业务服务-描述宝贝类型 -->
 				<div class="CCBability" v-if="clickLeftContent==2||clickLeftContent==110">
 					<div class="CCEditPageTemplate-CCRight-top">
 						<span class="text">描述宝贝类型</span>
@@ -349,8 +349,8 @@
 						</div>
 					</div>
 				</div>
-				<!-- 业务能力-描述宝贝类型 -->
-				<!-- 业务能力-描述标题 -->
+				<!-- 业务服务-描述宝贝类型 -->
+				<!-- 业务服务-描述标题 -->
 				<div class="CCBability" v-if="clickLeftContent==3||clickLeftContent==110">
 					<div class="CCEditPageTemplate-CCRight-top">
 						<span class="text">描述标题</span>
@@ -371,8 +371,8 @@
 						</div>
 					</div>
 				</div>
-				<!-- 业务能力-描述标题 -->
-				<!-- 业务能力-描述宝贝卖点 -->
+				<!-- 业务服务-描述标题 -->
+				<!-- 业务服务-描述宝贝卖点 -->
 				<div class="CCBability" v-if="clickLeftContent==4||clickLeftContent==110">
 					<div class="CCEditPageTemplate-CCRight-top">
 						<span class="text">描述宝贝卖点</span>
@@ -388,8 +388,8 @@
 						<p><input type="checkbox" class = "check-cc">对接KFC，过滤敏感词</p>
 					</div>
 				</div>
-				<!-- 业务能力-描述宝贝卖点 -->
-				<!-- 业务能力-描述宝贝图片 -->
+				<!-- 业务服务-描述宝贝卖点 -->
+				<!-- 业务服务-描述宝贝图片 -->
 				<div class="CCBability" v-if="clickLeftContent==6||clickLeftContent==110">
 					<div class="CCEditPageTemplate-CCRight-top">
 						<!-- <span class="xf-ability-icon" ></span> -->
@@ -434,7 +434,7 @@
 						<p><input type="checkbox" class = "check-cc">盗图盗链检测</p>
 					</div>
 				</div>
-				<!-- 业务能力-描述宝贝图片 -->
+				<!-- 业务服务-描述宝贝图片 -->
 				<!-- <a href="javascript:scrollTo(0,0);" target = "_self">回到顶部</a> -->
 			</div>
 		</div>
@@ -540,7 +540,7 @@
     data(){
       return {
         pageList:[],
-        historyPathTitle:'业务方：选择业务标 / 选择流程 / 配置流程 / 配置业务能力',
+        historyPathTitle:'业务方：选择业务标 / 选择流程 / 配置流程 / 配置业务服务',
         deleteContent:{
           item:'',
           url:''//删除的url请求
@@ -548,12 +548,12 @@
         hideDialog:true,
         hideMask:true,
         show:'-1',
-        clickLeftContent:'110',//gm  控制选中后右侧区域显示出相应的业务能力配置项。默认是110；
+        clickLeftContent:'110',//gm  控制选中后右侧区域显示出相应的业务服务配置项。默认是110；
         clickBorderContent:'110',//控制选中后边框的显示效果，默认是110。
         UIStyle:'0',//UIStyle=0表示是正常显示，UIStyle=1表示要向左对齐显示，要唤醒新的div，UIStyle=2表示要换颜色
         AlignStyle:'-1',//AlignStyle=0 正常样式，AlignStyle = 1，左对齐样式
         ColorStyle:'-1',//ColorStyle=0,正常样式，ColorStyle = 1，变色样式
-        DeleteLogoNums:'-1',//DeleteLogoNums = 3时，表示删除的logo要出现，不能触发Hide类，用户选中某个业务能力，触发showRight（i），DeleteLogoNums=i;hide类不能被触发。
+        DeleteLogoNums:'-1',//DeleteLogoNums = 3时，表示删除的logo要出现，不能触发Hide类，用户选中某个业务服务，触发showRight（i），DeleteLogoNums=i;hide类不能被触发。
         LogoNum:'-1',//LogoNum=3时，说明删除按钮被点击，应该调用hide类将表示删除的logo去掉，并且！将该div因此掉，也就是说该div只能在LogoNum！=3时出现（即if语句中添加LogoNum！=3）
         type:''
       }
@@ -583,7 +583,7 @@
       	this.show = i
       },
       showRight:function(i){
-      	this.clickLeftContent = i;//gm  控制选中后右侧区域显示出相应的业务能力配置项。默认是110；
+      	this.clickLeftContent = i;//gm  控制选中后右侧区域显示出相应的业务服务配置项。默认是110；
       	this.clickBorderContent = i;//控制选中后边框的显示效果，默认是110。
       	this.DeleteLogoNums = i;//设为i后，表示删除的图标出现，也就是说不能调用hide类
       },

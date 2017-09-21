@@ -3,98 +3,99 @@
 	<Step :step="step" style="margin-left:0%"></Step>
 	<div class="xf-identity-main">
 	   <div class="xf-item-header">
-	   	 <i class="xf-icon-chooseidentity"></i>
-	   	 <span>选择业务标</span><sup class="xf-sup-identity">3</sup>
-	   	 <!-- <el-select style="margin-left:10px" v-model="identitytype" filterable placeholder="筛选条件">
-    		<el-option-group v-for="group in identitytypeList" :key="group.label" :label="group.label">
-    			<el-option
-		          v-for="item in group.options"
-		          :key="item.value"
-		          :label="item.label"
-		          :value="item.label">
-		        </el-option>
-		      </el-option-group>
-  		    </el-select> -->
-  		<el-autocomplete style="margin-left:20px" class="inline-input" v-model="identitytype" :fetch-suggestions="querySearch" placeholder="请输入内容" :trigger-on-focus="false" @select="handleSelect"></el-autocomplete>
-		 </transition>
+					<i class="xf-icon-chooseidentity"></i>
+					<span>选择业务标</span><sup class="xf-sup-identity">3</sup>
+					<!-- <el-select style="margin-left:10px" v-model="identitytype" filterable placeholder="筛选条件">
+						<el-option-group v-for="group in identitytypeList" :key="group.label" :label="group.label">
+							<el-option
+									v-for="item in group.options"
+									:key="item.value"
+									:label="item.label"
+									:value="item.label">
+								</el-option>
+							</el-option-group>
+							</el-select> -->
+					<el-autocomplete style="margin-left:20px" class="inline-input" v-model="identitytype" :fetch-suggestions="querySearch" placeholder="请输入内容" :trigger-on-focus="false" @select="handleSelect"></el-autocomplete>
 	   </div>
 	   <div>
 	   	 <div v-if="!addAndUse" class="xf-item-box xf-item-box-new" @click="addIdentity" >
 	   	 	<div class="new-big-bg"></div>
 	   	 	<p>新建业务标</p>
 	   	 </div>
-	   	 <div class="xf-item-box xf-item-box-chooose">
-	   	   <router-link to="/cCprocess">
-	   	 	<i class="xf-icon-identity"></i><span title="点击查看详情"><router-link to="/identityDetail">女装-衬衫商品发布</router-link></span>
-	   	 	<div class="xf-item-box-des">
-	   	 	   <span class="xf-item-box-des-content">描述:描述文字描述文字描述文字描述文字描述文字描述文字</span>
-	   	 	   <br>
-	   	 	   <span class="xf-item-box-des-content">归属方：XXX</span>
-	   	 	</div>
-	   	 	<div class="xf-show-detail">
-	   	 		<div class="xf-show-detail-box">
-	   	 			<p><span>2</span></p>
-	   	 			<p>流程总数</p>
-	   	 		</div>
-	   	 		<div class="xf-show-detail-box">
-	   	 			<p><span>2</span></p>
-	   	 			<p>页面模板总数</p>
-	   	 		</div>
-	   	 		<div class="xf-show-detail-box">
-	   	 			<p><span>2</span></p>
-	   	 			<p>业务能力总数</p>
-	   	 		</div>
-	   	 	</div>
-	   	   </router-link>
-	   	 </div>
-	   	 <div class="xf-item-box xf-item-box-chooose">
-	   	   <router-link to="/cCprocess">
-	   	 	<i class="xf-icon-identity"></i><span title="点击查看详情"><router-link to="/identityDetail">女装-T-shirt商品发布</router-link></span>
-	   	 	<div class="xf-item-box-des">
-	   	 	   <span class="xf-item-box-des-content">描述:描述文字描述文字描述文字描述文字描述文字描述文字</span>
-	   	 	   <br>
-	   	 	   <span class="xf-item-box-des-content">归属方：XXX</span>
-	   	 	</div>
-	   	 	<div class="xf-show-detail">
-	   	 		<div class="xf-show-detail-box">
-	   	 			<p><span>2</span></p>
-	   	 			<p>流程总数</p>
-	   	 		</div>
-	   	 		<div class="xf-show-detail-box">
-	   	 			<p><span>2</span></p>
-	   	 			<p>页面模板总数</p>
-	   	 		</div>
-	   	 		<div class="xf-show-detail-box">
-	   	 			<p><span>2</span></p>
-	   	 			<p>业务能力总数</p>
-	   	 		</div>
-	   	 	</div>
-	   	   </router-link>
-	   	 </div>
-	   	 <div class="xf-item-box xf-item-box-chooose">
-	   	   <router-link to="/cCprocess">
-	   	 	<i class="xf-icon-identity"></i><span title="点击查看详情"><router-link to="/identityDetail">男鞋-帆布鞋商品发布</router-link></span>
-	   	 	<div class="xf-item-box-des">
-	   	 	   <span class="xf-item-box-des-content">描述:描述文字描述文字描述文字描述文字描述文字描述文字</span>
-	   	 	   <br>
-	   	 	   <span class="xf-item-box-des-content">归属方：XXX</span>
-	   	 	</div>
-	   	 	<div class="xf-show-detail">
-	   	 		<div class="xf-show-detail-box">
-	   	 			<p><span>2</span></p>
-	   	 			<p>流程总数</p>
-	   	 		</div>
-	   	 		<div class="xf-show-detail-box">
-	   	 			<p><span>2</span></p>
-	   	 			<p>页面模板总数</p>
-	   	 		</div>
-	   	 		<div class="xf-show-detail-box">
-	   	 			<p><span>2</span></p>
-	   	 			<p>业务能力总数</p>
-	   	 		</div>
-	   	 	</div>
-	   	   </router-link>
-	   	 </div>
+
+					<div class="xf-item-box xf-item-box-chooose">
+						<router-link to="/cCprocess">
+						<i class="xf-icon-identity"></i><span title="点击查看详情"><router-link to="/identityDetail">女装-衬衫商品发布</router-link></span>
+						<div class="xf-item-box-des">
+							<span class="xf-item-box-des-content">描述:描述文字描述文字描述文字描述文字描述文字描述文字</span>
+							<br>
+							<span class="xf-item-box-des-content">归属方：XXX</span>
+						</div>
+						<div class="xf-show-detail">
+							<div class="xf-show-detail-box">
+								<p><span>2</span></p>
+								<p>流程总数</p>
+							</div>
+							<div class="xf-show-detail-box">
+								<p><span>2</span></p>
+								<p>页面模板总数</p>
+							</div>
+							<div class="xf-show-detail-box">
+								<p><span>2</span></p>
+								<p>业务服务总数</p>
+							</div>
+						</div>
+						</router-link>
+					</div>
+					<div class="xf-item-box xf-item-box-chooose">
+						<router-link to="/cCprocess">
+						<i class="xf-icon-identity"></i><span title="点击查看详情"><router-link to="/identityDetail">女装-T-shirt商品发布</router-link></span>
+						<div class="xf-item-box-des">
+							<span class="xf-item-box-des-content">描述:描述文字描述文字描述文字描述文字描述文字描述文字</span>
+							<br>
+							<span class="xf-item-box-des-content">归属方：XXX</span>
+						</div>
+						<div class="xf-show-detail">
+							<div class="xf-show-detail-box">
+								<p><span>2</span></p>
+								<p>流程总数</p>
+							</div>
+							<div class="xf-show-detail-box">
+								<p><span>2</span></p>
+								<p>页面模板总数</p>
+							</div>
+							<div class="xf-show-detail-box">
+								<p><span>2</span></p>
+								<p>业务服务总数</p>
+							</div>
+						</div>
+						</router-link>
+					</div>
+					<div class="xf-item-box xf-item-box-chooose">
+						<router-link to="/cCprocess">
+						<i class="xf-icon-identity"></i><span title="点击查看详情"><router-link to="/identityDetail">男鞋-帆布鞋商品发布</router-link></span>
+						<div class="xf-item-box-des">
+							<span class="xf-item-box-des-content">描述:描述文字描述文字描述文字描述文字描述文字描述文字</span>
+							<br>
+							<span class="xf-item-box-des-content">归属方：XXX</span>
+						</div>
+						<div class="xf-show-detail">
+							<div class="xf-show-detail-box">
+								<p><span>2</span></p>
+								<p>流程总数</p>
+							</div>
+							<div class="xf-show-detail-box">
+								<p><span>2</span></p>
+								<p>页面模板总数</p>
+							</div>
+							<div class="xf-show-detail-box">
+								<p><span>2</span></p>
+								<p>业务服务总数</p>
+							</div>
+						</div>
+						</router-link>
+					</div>
+
 	   	 <div class="xf-clear"></div>
 	   </div>
 	   <div class="xf-skip-step" v-if="addAndUse">
@@ -161,9 +162,11 @@
 				this.hideMask = data
 			},
 			confirm:function(data){
+				console.log(data);
 				this.hideIdentity = data
 				this.hideMask = data
 				this.addAndUse = data
+				this.$router.push('/cCprocess');
 			},
 			querySearch(queryString, cb) {
         		var restaurants = this.restaurants;

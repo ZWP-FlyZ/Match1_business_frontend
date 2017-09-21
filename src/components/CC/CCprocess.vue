@@ -13,7 +13,7 @@
 
         <div class="BZProcess-des">
           <img src="" alt="">
-          <a href="" ><router-link to="" class = "L1-name">商品发布（2）</router-link></a>
+          <a href="" ><router-link to="" class = "L1-name">解决方案</router-link></a>
           <input type="checkbox"  @click="checkboxed(0,checkList,flag)" class = "chk_2" name="checkName" id = "11">
           <label for="11"> </label>全选
          
@@ -67,11 +67,12 @@
        <div>
         <div class="BZProcess-des">
           <img src="" alt="">
-          <a href="" ><router-link to="" class = "L1-name">商品发布（1）</router-link></a>
+          <a href="" ><router-link to="" class = "L1-name">我的方案</router-link></a>
           <input type="checkbox"  @click="checkboxed(1,checkListMy,flagMy)" class = "chk_2"  id = "12">
           <label for="12"> </label>全选
         </div> 
-        <div class="table-background" v-if = "deleteLogoNums!=1">
+        <!-- <div class="table-background" v-if = "deleteLogoNums!=1"> -->
+          <div class="table-background" v-if = "true">
           <div style= "border:1px solid transparent;height:32px;">
             <input type="checkbox"  value="2" v-model="checkListMy" style = "width:17px;height:17px;" id="2" class = "chk_1">
             <label for="2"></label>

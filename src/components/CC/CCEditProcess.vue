@@ -125,10 +125,10 @@
           </div>
           </transition>
           <!-- class = "xf-go-edit-bzability" -->
-          <button @click="pagePre('selectedlm')" class = "link-btn link-btn-default" v-if="(item.id==0)&&multiple.selectedlm.length!=0">去编辑业务能力</button>
-          <button @click="pagePre('selectedhp')" class = "link-btn link-btn-default" v-if="item.id==2&&multiple.selectedhp.length!=0">去编辑业务能力</button>
-          <button @click="pagePre('selectedsp')" class = "link-btn link-btn-default" v-if="item.id==3&&multiple.selectedsp.length!=0">去编辑业务能力</button>
-          <button @click="pagePre('selectedList')" class = "link-btn link-btn-default" v-if="item.id==6&&multiple.selectedList.length!=0">去编辑业务能力</button>
+          <button @click="pagePre('selectedlm')" class = "link-btn link-btn-default" v-if="(item.id==0)&&multiple.selectedlm.length!=0">去编辑业务服务</button>
+          <button @click="pagePre('selectedhp')" class = "link-btn link-btn-default" v-if="item.id==2&&multiple.selectedhp.length!=0">去编辑业务服务</button>
+          <button @click="pagePre('selectedsp')" class = "link-btn link-btn-default" v-if="item.id==3&&multiple.selectedsp.length!=0">去编辑业务服务</button>
+          <button @click="pagePre('selectedList')" class = "link-btn link-btn-default" v-if="item.id==6&&multiple.selectedList.length!=0">去编辑业务服务</button>
           </div>
           <div class = "heads xf-heads-half" v-if="item.id==4">
             <i class="el-icon-d-arrow-left xf-edit-icon"></i> 节点前置条件

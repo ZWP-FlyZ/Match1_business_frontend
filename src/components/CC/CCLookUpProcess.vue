@@ -124,7 +124,7 @@
           </div>
           <div class="heads xf-heads-half">
             <i class="el-icon-document xf-edit-icon"></i> 关联页面模板
-            <!-- <router-link to="/cCEditPage" class = "xf-go-edit-bzability" v-if="item.id==0||item.id==2||item.id==3||item.id==6">去编辑业务能力</router-link> -->
+            <!-- <router-link to="/cCEditPage" class = "xf-go-edit-bzability" v-if="item.id==0||item.id==2||item.id==3||item.id==6">去编辑业务服务</router-link> -->
           </div>
           <div class="items" v-if="item.id==0||item.id==2||item.id==3||item.id==6">
           <form  class="xf-yellow">

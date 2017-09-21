@@ -37,7 +37,7 @@
       <router-link to="/cCEditPageTemplate" class="step-a">
         <img v-if="step==0||step==1 || step==2|| step==3" class="xf-cc-step-img" src="static/img/step4.png"/>
         <img v-if="step==4 || step==5" class="xf-cc-step-img" src="static/img/step44.png"/>
-        <span class="xf-cc-step-text" style="left:3.5%">配置页面、业务能力</span>
+        <span class="xf-cc-step-text" style="left:3.5%">配置页面、业务服务</span>
       </router-link>
       </div>
       <div class="xf-cc-step-line"></div>

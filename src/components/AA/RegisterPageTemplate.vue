@@ -40,7 +40,7 @@
 
     <div class="heads xf-heads">
       <i class="el-icon-menu xf-edit-icon"></i>  
-      关联业务能力剖面
+      关联业务服务剖面
     </div>
     <div class="items xf-items-addBottom">
       <div class="item xf-item">
@@ -193,7 +193,7 @@
           devauthor:'',//页面模板开发者
           devdate:'',//页面模板开发日期
           processNodes:[],//关联的流程节点
-          //页面模板上的业务能力剖面
+          //页面模板上的业务服务剖面
           pageModelTypes:[],
           pagePreConditions:[],
           application:''

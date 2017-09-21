@@ -1,10 +1,10 @@
 <template>
   <div class = "BZability">
-    <div>业务能力定制总数：12</div>
+    <div>业务服务定制总数：12</div>
     <div class="BZability-register">
       <ul>
-          <li class = "BZability-reg">业务能力</li>
-          <li class = "BAability-create"><router-link to="/registerBZAbility" class = "link-btn link-btn-default">注册业务能力</router-link></li>
+          <li class = "BZability-reg">业务服务</li>
+          <li class = "BAability-create"><router-link to="/registerBZAbility" class = "link-btn link-btn-default">注册业务服务</router-link></li>
       </ul>
     </div>
     <div class = "BZability-list">

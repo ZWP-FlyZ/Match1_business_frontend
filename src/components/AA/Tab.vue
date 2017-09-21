@@ -10,7 +10,7 @@
     </li>
     <li v-bind:class="{'tab-active':isActive==3}" @click="changeTab(3)">
       <div class="tab-icon tab-icon-bza" v-bind:class="{'tab-icon-bza-active':isActive==3}"></div>
-      <router-link to="/bzability" class="link" ><span>业务能力</span>(1)</router-link>
+      <router-link to="/bzability" class="link" ><span>业务服务</span>(1)</router-link>
     </li>
     <li v-bind:class="{'tab-active':isActive==4}" @click="changeTab(4)">
       <div class="tab-icon tab-icon-abl" v-bind:class="{'tab-icon-zbl-active':isActive==4}"></div>
@@ -26,7 +26,7 @@
       <span slot="label"><i class="el-icon-menu"></i> 页面模版</span>
     </el-tab-pane>
     <el-tab-pane name="third">
-      <span slot="label"><i class="el-icon-setting"></i> 业务能力</span>
+      <span slot="label"><i class="el-icon-setting"></i> 业务服务</span>
     </el-tab-pane>
     <el-tab-pane name="fourth">
     <span slot="label"><i class="el-icon-document"></i> 能力</span>

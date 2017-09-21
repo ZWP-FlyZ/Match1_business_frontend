@@ -1,15 +1,15 @@
 <template>
   <div class="regisiterpage">
      <div class="heads xf-heads">
-      <i class="el-icon-share xf-edit-icon"></i> 业务能力基本信息
+      <i class="el-icon-share xf-edit-icon"></i> 业务服务基本信息
     </div>
     <div class="items">
       <form  class="itemsform">
         <div class="item">
-          <label class="nameid">业务能力名称: </label><input type="text" class="inputbox checkView gm-input"  placeholder="描述标题" autocomplete="on" autofocus="autofocus">
+          <label class="nameid">业务服务名称: </label><input type="text" class="inputbox checkView gm-input"  placeholder="描述标题" autocomplete="on" autofocus="autofocus">
         </div>
         <div class="item">
-          <label class="nameid">业务能力描述: </label> <input type="text" class="inputbox checkView gm-input"  placeholder="描述标题"  autocomplete="on" >
+          <label class="nameid">业务服务描述: </label> <input type="text" class="inputbox checkView gm-input"  placeholder="描述标题"  autocomplete="on" >
         </div>
         <div class="item">
           <label class="nameid"> KEY: </label> <input type="text" class="inputbox checkView gm-input"  placeholder="xxx"  autocomplete="on" >
@@ -24,7 +24,7 @@
     </div>
     <div class="heads xf-heads">
       <i class="el-icon-picture xf-edit-icon"></i> 
-     业务能力剖面
+     业务服务剖面
     </div>
     <div class="items xf-items-addBottom">
       <div class="item xf-item">

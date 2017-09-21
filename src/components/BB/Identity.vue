@@ -27,7 +27,7 @@
 	   	 		</div>
 	   	 		<div class="xf-show-detail-box">
 	   	 			<p><span>2</span></p>
-	   	 			<p>业务能力总数</p>
+	   	 			<p>业务服务总数</p>
 	   	 		</div>
 	   	 	</div>
 	   	   </router-link>
@@ -51,7 +51,7 @@
 	   	 		</div>
 	   	 		<div class="xf-show-detail-box">
 	   	 			<p><span>2</span></p>
-	   	 			<p>业务能力总数</p>
+	   	 			<p>业务服务总数</p>
 	   	 		</div>
 	   	 	</div>
 	   	   </router-link>
@@ -75,7 +75,7 @@
 	   	 		</div>
 	   	 		<div class="xf-show-detail-box">
 	   	 			<p><span>2</span></p>
-	   	 			<p>业务能力总数</p>
+	   	 			<p>业务服务总数</p>
 	   	 		</div>
 	   	 	</div>
 	   	   </router-link>
